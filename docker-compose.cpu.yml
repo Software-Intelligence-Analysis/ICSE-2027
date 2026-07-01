@@ -1,0 +1,50 @@
+# =============================================================================
+# docker-compose.cpu.yml — CPU-only override (Mac, no NVIDIA GPU)
+# =============================================================================
+#
+# Use this instead of docker-compose.yml on machines without an NVIDIA GPU:
+#
+#   docker compose -f docker-compose.cpu.yml up ollama -d
+#   docker compose -f docker-compose.cpu.yml build runner
+#   docker compose -f docker-compose.cpu.yml run runner bash scripts/run_phase7.sh
+#
+# Inference will be 8-10x slower than GPU. Fine for smoke testing.
+# =============================================================================
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: llmops_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+    # No `deploy` section — no GPU reservation
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: llmops_runner
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      MLFLOW_TRACKING_URI: sqlite:///results/tracking.db
+    volumes:
+      - ./results:/app/results
+      - ./src:/app/src
+    command: ["bash", "-c", "echo 'Runner ready. Run: bash scripts/run_phase7.sh'"]
+    stdin_open: true
+    tty: true
+
+volumes:
+  ollama_models:

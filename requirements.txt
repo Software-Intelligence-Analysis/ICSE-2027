@@ -1,0 +1,9 @@
+# requirements.txt
+
+datasets>=2.21.0
+langchain==0.3.25
+langchain-community==0.3.24
+langchain-ollama==0.3.10
+langgraph==0.2.76
+mlflow>=2.16.0
+evalplus>=0.3.0

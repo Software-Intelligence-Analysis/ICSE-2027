@@ -1,0 +1,6 @@
+run_timestamp,run_label,version,temperature,retry_temperature,threshold,dataset_size,pass_at_1_rate,pass_at_1_count,pass_at_2_rate,pass_at_2_count,avg_pre_hallucination,avg_post_hallucination,avg_improvement,avg_latency_s,fixer_trigger_rate,fixer_change_rate,gate_revert_rate,use_fewshot,use_iterative,use_gate,use_fixer_context
+20260524_231955,p8_baseline,baseline,0.0,0.0,0.6,100,0.2,20,,,0.0,0.741,0.0,1.158,0.0,0.0,0.0,0,0,1,1
+20260524_232211,p8_all_on,with_monitoring,0.0,0.0,0.6,100,0.52,52,,,0.741,0.405,0.336,9.846,0.78,0.67,0.11,0,0,1,1
+20260524_233907,p8_ablate_fixer_3b,with_monitoring,0.0,0.0,0.6,100,0.51,51,,,0.741,0.454,0.287,6.822,0.78,0.63,0.15,0,0,1,1
+20260524_235100,p8_ablate_no_context,with_monitoring,0.0,0.0,0.6,100,0.48,48,,,0.741,0.448,0.293,7.443,0.78,0.68,0.1,0,0,1,0
+20260525_000355,p8_ablate_no_gate,with_monitoring,0.0,0.0,0.6,100,0.53,53,,,0.741,0.407,0.334,8.474,0.78,0.78,0.0,0,0,0,1

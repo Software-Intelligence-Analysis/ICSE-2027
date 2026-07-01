@@ -1,0 +1,6 @@
+run_timestamp,run_label,version,temperature,threshold,problem_index,entry_point,success,pre_score,post_score,improvement,latency_s,fixer_triggered,fixer_changed
+20260308_182619,smoke-test,with_monitoring,0.0,0.3,0,has_close_elements,1,0.5,0.5,0.0,5.858,1,1
+20260308_182619,smoke-test,with_monitoring,0.0,0.3,1,separate_paren_groups,0,0.5,0.8,-0.3,9.984,1,1
+20260308_182619,smoke-test,with_monitoring,0.0,0.3,2,truncate_number,1,0.0,1.0,-1.0,1.821,0,0
+20260308_182619,smoke-test,with_monitoring,0.0,0.3,3,below_zero,0,0.5,0.0,0.5,3.167,1,1
+20260308_182619,smoke-test,with_monitoring,0.0,0.3,4,mean_absolute_deviation,1,0.5,1.0,-0.5,3.741,1,1

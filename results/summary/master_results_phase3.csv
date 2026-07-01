@@ -1,0 +1,10 @@
+run_timestamp,run_label,version,temperature,threshold,dataset_size,success_rate,successes,avg_pre_hallucination,avg_post_hallucination,avg_improvement,avg_latency_s,fixer_trigger_rate,fixer_change_rate,gate_revert_rate
+20260403_230905,phase3-baseline-t0.0-r1,baseline,0.0,0.6,100,0.56,56,0.0,0.64,0.0,3.373,0.0,0.0,0.0
+20260403_231448,phase3-baseline-t0.3-r1,baseline,0.3,0.6,100,0.56,56,0.0,0.64,0.0,3.585,0.0,0.0,0.0
+20260403_232051,phase3-baseline-t0.7-r1,baseline,0.7,0.6,100,0.53,53,0.0,0.624,0.0,3.345,0.0,0.0,0.0
+20260404_152705,phase3-baseline-t0.0-r2,baseline,0.0,0.6,100,0.56,56,0.0,0.64,0.0,3.302,0.0,0.0,0.0
+20260404_160443,phase3-baseline-t0.3-r2,baseline,0.3,0.6,100,0.6,60,0.0,0.65,0.0,3.33,0.0,0.0,0.0
+20260404_161022,phase3-baseline-t0.7-r2,baseline,0.7,0.6,100,0.51,51,0.0,0.646,0.0,3.43,0.0,0.0,0.0
+20260404_214253,phase3-baseline-t0.0-r3,baseline,0.0,0.6,100,0.56,56,0.0,0.64,0.0,3.239,0.0,0.0,0.0
+20260404_214822,phase3-baseline-t0.3-r3,baseline,0.3,0.6,100,0.57,57,0.0,0.644,0.0,3.282,0.0,0.0,0.0
+20260404_215356,phase3-baseline-t0.7-r3,baseline,0.7,0.6,100,0.52,52,0.0,0.645,0.0,3.344,0.0,0.0,0.0

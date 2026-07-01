@@ -1,0 +1,5 @@
+model,tau,n_trials,mean_delta_pp,ci_lower,ci_upper,excludes_zero
+Code Llama 7B,0.6,3,30.33,24.08,36.59,True
+Code Llama 7B,0.7,3,31.0,26.7,35.3,True
+Qwen2.5 Coder 7B,0.6,3,-4.0,-6.48,-1.52,True
+Qwen2.5 Coder 7B,0.7,3,-2.0,-2.0,-2.0,True

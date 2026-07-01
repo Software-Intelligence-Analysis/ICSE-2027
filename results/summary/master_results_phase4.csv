@@ -1,0 +1,7 @@
+run_timestamp,run_label,version,temperature,threshold,dataset_size,pass_at_1_rate,pass_at_1_count,pass_at_2_rate,pass_at_2_count,avg_pre_hallucination,avg_post_hallucination,avg_improvement,avg_latency_s,fixer_trigger_rate,fixer_change_rate,gate_revert_rate,use_fewshot,use_iterative
+20260423_205816,phase4_codellama_baseline,baseline,0.0,0.6,20,0.3,6,,,0.0,0.765,0.0,3.281,0.0,0.0,0.0,0,0
+20260423_205816,phase4_codellama_baseline,with_monitoring,0.0,0.6,20,0.7,14,,,0.765,0.355,0.41,9.356,0.9,0.7,0.2,0,0
+20260423_210233,phase4_codellama_fewshot,baseline,0.0,0.6,20,0.3,6,,,0.0,0.705,0.0,5.263,0.0,0.0,0.0,1,0
+20260423_210233,phase4_codellama_fewshot,with_monitoring,0.0,0.6,20,0.5,10,,,0.705,0.395,0.31,74.174,0.8,0.65,0.15,1,0
+20260423_213141,phase4_codellama_iterative,baseline,0.0,0.6,20,0.3,6,0.55,11,0.0,0.765,0.0,0.93,0.0,0.0,0.0,0,1
+20260423_213141,phase4_codellama_iterative,with_monitoring,0.0,0.6,20,0.7,14,0.75,15,0.765,0.355,0.41,9.581,0.9,0.7,0.2,0,1

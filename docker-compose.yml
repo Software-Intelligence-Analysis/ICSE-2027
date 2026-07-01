@@ -1,0 +1,94 @@
+# =============================================================================
+# docker-compose.yml — Agentic LLMOps Full Stack
+# =============================================================================
+#
+# Two services:
+#   ollama   — serves all LLMs locally via the Ollama API
+#   runner   — runs the experiment scripts against Ollama
+#
+# USAGE (professor's GPU machine or any Linux machine with Docker):
+# ─────────────────────────────────────────────────────────────────
+#
+#   Step 1: Install Docker and nvidia-container-toolkit (for GPU support)
+#     https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
+#
+#   Step 2: Clone the repo and navigate to the project root
+#     git clone [anonymous repository]
+#     cd agentic-llmops
+#
+#   Step 3: Start Ollama and pull the required models
+#     docker compose up ollama -d
+#     docker compose exec ollama ollama pull llama3.1:8b
+#     docker compose exec ollama ollama pull codellama:7b
+#     docker compose exec ollama ollama pull deepseek-coder:6.7b
+#     docker compose exec ollama ollama pull qwen2.5-coder:7b
+#     docker compose exec ollama ollama pull starcoder2:7b
+#
+#   Step 4: Run Phase 10
+#     docker compose run runner bash scripts/run_phase10_cross_benchmark.sh
+#
+#   Step 5: Results land in ./results/ on your host machine (mounted volume)
+#
+# RESUME after interruption:
+#   RESUME_FROM=12 docker compose run runner bash scripts/run_phase10_cross_benchmark.sh
+#
+# CPU-only / Mac (no NVIDIA GPU):
+#   Use docker-compose.cpu.yml instead:
+#     docker compose -f docker-compose.cpu.yml up ollama -d
+#   Expect 8-10x slower inference.
+# =============================================================================
+
+services:
+
+  # ── Ollama: LLM inference server ──────────────────────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: llmops_ollama
+    ports:
+      - "11434:11434"       # expose so you can also curl from host
+    volumes:
+      - ollama_models:/root/.ollama   # persist downloaded models across restarts
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all            # use all available GPUs
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  # ── Experiment runner ──────────────────────────────────────────────────────
+  runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: llmops_runner
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      # Point the agent at the Ollama container (not localhost)
+      OLLAMA_HOST: http://ollama:11434
+      # MLflow tracking (optional — comment out if not using)
+      MLFLOW_TRACKING_URI: sqlite:///results/tracking.db
+    volumes:
+      # Mount results/ so experiment outputs persist on the host
+      - ./results:/app/results
+      # Mount src/ so you can edit code without rebuilding the image
+      - ./src:/app/src
+    # Default command — override with: docker compose run runner bash scripts/run_phase10...
+    command: ["bash", "-c", "echo 'Runner ready. Run: bash scripts/run_phase10_cross_benchmark.sh'"]
+    # Prevent the runner from exiting immediately when used as a one-off
+    stdin_open: true
+    tty: true
+
+volumes:
+  ollama_models:
+    # Named volume so Ollama model weights persist across docker compose down/up
+    # Models are large (4-8 GB each) so you do not want to re-download them

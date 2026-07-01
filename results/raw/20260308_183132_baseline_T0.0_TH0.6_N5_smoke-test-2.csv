@@ -1,0 +1,6 @@
+run_timestamp,run_label,version,temperature,threshold,problem_index,entry_point,success,pre_score,post_score,improvement,latency_s,fixer_triggered,fixer_changed
+20260308_183132,smoke-test-2,baseline,0.0,0.6,0,has_close_elements,1,,0.0,0.0,1.844,0,0
+20260308_183132,smoke-test-2,baseline,0.0,0.6,1,separate_paren_groups,0,,0.0,0.0,2.456,0,0
+20260308_183132,smoke-test-2,baseline,0.0,0.6,2,truncate_number,1,,0.0,0.0,0.855,0,0
+20260308_183132,smoke-test-2,baseline,0.0,0.6,3,below_zero,1,,0.0,0.0,1.489,0,0
+20260308_183132,smoke-test-2,baseline,0.0,0.6,4,mean_absolute_deviation,1,,0.0,0.0,1.388,0,0
